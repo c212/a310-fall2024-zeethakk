@@ -6,9 +6,9 @@ class Point:
         self.x = x
         self.y = y
     def __str__(self):
-        return "(" + str(self.x) + ", " + str(self.y) + ")"
+        return "(" + str(self.x) + ", " + str(self.y) + ")"           #<------------Puts each x and y into coordinate form for presentation
     def distanceTo(self, other):
-        distance = math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+        distance = math.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)     #<-------------Distance Formula
         # return "The distance between the two points is: " + str(distance)
         return distance
 
@@ -34,7 +34,7 @@ class Line(Point):
         # dx = abs(self.p2.x - self.p1.x)
         # dy = abs(self.p2.y - self.p1.y)
         a = self.p2.distanceTo(self.p1)
-        # lineLength = math.sqrt(dx**2 + dy**2)
+        # lineLength = math.sqrt(dx**2 + dy**2)            #<-----------Distance between the endpoints of the line = line length
         #return "The length of the line is: " + a
         return a
 
@@ -55,8 +55,8 @@ class Triangle(Line):
     def __str__(self):
         return "Triangle {" + str(self.l1.p1) + ", " + str(self.l2.p1) + ", " + str(self.l3.p1) + "}"
     def area(self):
-        x = (self.l1.length() + self.l2.length() + self.l3.length())/2
-        a = math.sqrt(x*(x - self.l1.length())*(x - self.l2.length())*(x - self.l3.length()))
+        x = (self.l1.length() + self.l2.length() + self.l3.length())/2                              #<----------- Half of the perimeter or triangle
+        a = math.sqrt(x*(x - self.l1.length())*(x - self.l2.length())*(x - self.l3.length()))      #<----------- Area formula using perimeter
         return a
     
 print("---------------------------Class Triangle---------------------------")
@@ -79,14 +79,14 @@ class LinkedList:
         result = ""
         while (temp):
             # print(temp.num)
-            result = result + "|" + temp.num + "|"
+            result = result + "|" + temp.num + "|"                 #<-------------- Prints |name|
             temp = temp.next
         print(result)
 
 # NOTE: how to test this?
 print("---------------------------Class LinkedList---------------------------")
-a = LinkedList("Christa", None)
-a = LinkedList("Ahmed", a) 
+a = LinkedList("Christa", None)          # <----------- returns|christia| then nothing because of the none
+a = LinkedList("Ahmed", a)                   #<------ returns |ahmed||christia| because its ahmed then a which is |christia|
 a.show()
 
 ############################### BinaryTree Class #############################
@@ -95,44 +95,25 @@ class BinaryTree:
     def __init__(self, value, left, right):
         (self.value, self.left, self.right) = (value, left, right)
     def show(self):
-        if self.left == None:
+        if self.left == None:                      #<----------- there is not a left value, have a '.' as the left child node placeholder, since its empty
             left = " . "
         else: 
-            left = self.left.show()    
+            left = self.left.show()                #<----------- have the left inserted as the 'self's' node
 
-        if self.right == None:
+        if self.right == None:                     #<----------- there is not a left value, have a '.' as the left child node placeholder, since its empty
             right = " . "
         else: 
-            right = self.right.show() 
+            right = self.right.show()              #<----------- have the left inserted as the 'self's' node
 
         return "(" + left + " " + str(self.value) + " " + right + ")"
 
 
 print("---------------------------Class BinaryTree---------------------------")
-a = BinaryTree(6, None, None)
+a = BinaryTree(5, None, None)
 print(a.show())
 
-b = BinaryTree(3, None, a)
-print(b.show())
+a = BinaryTree(1, a, None)
+print(a.show())
 
-c = BinaryTree(9, None, None)
-print(c.show())
-
-d = BinaryTree(8, None, c)
-print(d.show())
-
-e = BinaryTree(7, b, d)
-print(e.show())
-
-
-#a = BinaryTree(7, None, None)
-#print(a.show())
-
-#a = BinaryTree(3, a, None)
-#print(a.show())
-
-#a = BinaryTree(8, None, None)
-#print(a.show())
-
-#a = BinaryTree(5, BinaryTree(6, a, None), None)
-#print(a.show())
+a = BinaryTree(2, BinaryTree(4, None, a), None)
+print(a.show())
